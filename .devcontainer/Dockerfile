@@ -60,7 +60,4 @@ RUN echo 'source(file.path(Sys.getenv("HOME"), ".vscode-R", "init.R"))' >> ${HOM
 # Expose Rstudio port. Log in with rstudio/rstudio
 EXPOSE 8787
 
-# Expose Jupyter port
-EXPOSE 8888
-
 CMD ["/init"]
