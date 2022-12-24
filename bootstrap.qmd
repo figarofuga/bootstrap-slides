@@ -1,0 +1,129 @@
+---
+title: "Bootstrapについて"
+author: "Nozomi Niimi"
+format: revealjs
+engine: knitr
+---
+
+## Take home messages
+
+普通に95%信頼区間が出せない時に. 
+
+- 大元のデータから
+- n = 1000以上で
+- Bootstrap標本を使って計算する
+- 基本はPercentile法で良いが、BCa法やBootstrap t標本という手もある
+
+
+## Introduction
+
+- 最近研究でbootstrapを使う事が複数回あった
+- 正直雰囲気でやっていたので、しっかり勉強してみたい
+
+## 95％信頼区間の出し方
+例えば、患者のBMIを出すとき
+
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+
+```{r warning=FALSE,message=FALSE}
+library(dplyr)
+mtcars %>% select(gear)
+```
+
+:::
+::: {.column width="50%"}
+
+```{r warning=FALSE,message=FALSE}
+library(dplyr)
+select(mtcars, gear)
+```
+
+:::
+::::::::::::::
+
+```{r bmi}
+library(knitr)
+library(tibble)
+library(dplyr)
+dat <- tibble(
+    id = 1:300, 
+    bmi = rnorm(n = 300, mean = 21, sd = 1.0)
+)
+kable(head(dat, 5))
+hist(dat$bmi)
+```
+## 信頼区間の出し方
+
+- この分布がt分布に従うとして、t分布の平均と分散を最尤法で推定
+- t分布の数表を確認して、1.96×標準偏差で計算する
+
+```{r}
+library(infer)
+```
+
+
+## でも・・・・・・
+
+__例えば__
+```{r}
+if_dat <- data.frame(
+    id = 1:10, 
+    impact_factor = c(0,0,0,1,1,2,3,2,0,100)
+)
+hist(if_dat$impact_factor)
+```
+
+## Bootstrapの歴史
+
+Jacknife
+
+## Bootstrapの概念
+
+Plug in principles
+
+## How to bootstrap 1
+
+```{r, tables}
+library(tidyverse)
+dat <- tibble::tibble(
+    id = 1:300, 
+    impact_factor = rnorm(n = 300, mean = 0, sd = 1)) |> 
+    dplyr::mutate(impact_factor = if_else(impact_factor < 0, 0, impact_factor))
+knitr::kable(head(dat, 5))
+hist(dat$impact_factor)
+```
+
+## How to bootstrap 1
+::: aside
+Some additional commentary of more peripheral interest.
+:::
+## How to bootstrap 1
+
+## How to bootstrap 1
+
+## その他のBootstrap法について
+
+- Bootstrap t分布
+- BCa法
+- ABC法など
+
+## どう違うの？
+
+簡単にいうと効率が違う！
+
+## Bootstrapの素朴な疑問
+
+- nは幾つにすればいいの？
+- 元データはどれくらい必要なの？
+- 結局どれを使えばいいの？
+
+## Take home message
+
+
+
+
+
+

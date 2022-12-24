@@ -5,22 +5,58 @@
 		// Update VARIANT to pick a specific R version: 4, 4.1, 4.0
 		"args": { "VARIANT": "4.2" }
 	},
+	"features": {
+		
+		"ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+		},
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"r.rterm.linux": "/usr/local/bin/radian",
-		"r.bracketedPaste": true,
-		"r.plot.useHttpgd": true,
+		"vim.surround": true, 
 		"[r]": {
-			"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+			"editor.rulers": [
+				80 
+			],
+			"editor.wordWrap": "bounded"
+		},
+		"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?",
+		"rewrap.autoWrap.enabled": true,
+		"rewrap.wrappingColumn": 80,
+		"rewrap.doubleSentenceSpacing": true,
+		"r.lsp.debug": true,
+		"r.alwaysUseActiveTerminal": true,
+		"r.bracketedPaste": true,
+		"r.rpath.linux": "/usr/local/bin/R",
+		"r.rterm.linux": "/usr/local/bin/radian",
+		"r.rterm.option": [
+			"--no-save",
+			"--no-restore"
+		],
+		"r.plot.useHttpgd": true,
+		"r.session.levelOfObjectDetail": "Detailed",
+		"r.session.objectLengthLimit": 100,
+		"r.session.viewers.viewColumn": {
+			"plot": "Active",
+			"viewer": "Active",
+			"view": "Active",
+			"helpPanel": "Active"
 		}
-	},
+		},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		// Add Jupyter, R and Python vscode extensions
-		"REditorSupport.r",
-		"rdebugger.r-debugger"
+		"vscode-icons-team.vscode-icons",
+			"ionutvmi.path-autocomplete",
+			"quarto.quarto",
+			"reditorsupport.r",
+			"rdebugger.r-debugger",
+			"vscodevim.vim",
+			"jock.svg",
+			"donjayamanne.gi",
+			"hediet.vscode-drawio",
+			"mhutchie.git-graph"
 	],
 
 	// Forward Jupyter and RStudio ports
