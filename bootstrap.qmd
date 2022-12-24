@@ -14,7 +14,6 @@ engine: knitr
 - Bootstrap標本を使って計算する
 - 基本はPercentile法で良いが、BCa法やBootstrap t標本という手もある
 
-
 ## Introduction
 
 - 最近研究でbootstrapを使う事が複数回あった
@@ -24,26 +23,10 @@ engine: knitr
 例えば、患者のBMIを出すとき
 
 
-:::::::::::::: {.columns}
-::: {.column width="50%"}
+## 
 
-
-```{r warning=FALSE,message=FALSE}
-library(dplyr)
-mtcars %>% select(gear)
-```
-
-:::
-::: {.column width="50%"}
-
-```{r warning=FALSE,message=FALSE}
-library(dplyr)
-select(mtcars, gear)
-```
-
-:::
-::::::::::::::
-
+:::: {.columns}
+::: {.column width="40%"}
 ```{r bmi}
 library(knitr)
 library(tibble)
@@ -53,32 +36,73 @@ dat <- tibble(
     bmi = rnorm(n = 300, mean = 21, sd = 1.0)
 )
 kable(head(dat, 5))
+```
+:::
+
+::: {.column width="60%"}
+
+```{r warning=FALSE,message=FALSE}
 hist(dat$bmi)
 ```
+
+:::
+
+::::
+
 ## 信頼区間の出し方
 
-- この分布がt分布に従うとして、t分布の平均と分散を最尤法で推定
+- この分布が**t分布に従うとして**、t分布の平均と分散を最尤法で推定
 - t分布の数表を確認して、1.96×標準偏差で計算する
-
-```{r}
-library(infer)
-```
 
 
 ## でも・・・・・・
 
-__例えば__
-```{r}
-if_dat <- data.frame(
-    id = 1:10, 
-    impact_factor = c(0,0,0,1,1,2,3,2,0,100)
-)
-hist(if_dat$impact_factor)
-```
+- 心不全患者のBNPの分布は？
+- 新しいDeep learningモデルのtest cohortでのAUROCの分散は？
+- 死亡、心不全再入院という風に階層をおいた時のWin ratioの95%信頼区間は？
+
+医学では正規分布でないものの方が多い！
 
 ## Bootstrapの歴史
+- Jacknifeという手法が***年に開発された
+- これは、1つずつ標本から抜いていくという手法
+- こっちの方が自然なイメージ
 
-Jacknife
+**例えば**
+- MIを起こした患者の年齢とLDLを見たデータがあるとして
+```{r}
+mi_dat <- data.frame(
+    id = 1:99, 
+    age = rnorm(n = 99, mean = 75, sd = 3), 
+    ldl = runif(n = 99, min = 170, max = 210)
+) |> 
+tibble::add_row(id = 100, age = 25, ldl = 300) |> 
+tibble::add_row(id = 101, age = 35, ldl = 75)
+tail(mi_dat, 3)
+```
+
+## その場合
+- このようなデータの時に分散を広く推定してしまう
+:::: {.columns}
+::: {.column width="40%"}
+```{r}
+hist(mi_dat$age)
+```
+:::
+
+::: {.column width="60%"}
+```{r warning=FALSE,message=FALSE}
+hist(mi_dat$ldl)
+```
+:::
+::::
+
+## Bootstrapとはなにか？
+- ホラ吹き男爵の冒険のエピソード
+- 「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある
+![](images/horafuki.png){.absolute top=200 left=0 width="350" height="300"}
+- 読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
+
 
 ## Bootstrapの概念
 
