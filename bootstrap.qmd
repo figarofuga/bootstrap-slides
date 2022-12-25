@@ -68,28 +68,47 @@ hist(dat$bmi)
 -   新しいDeep learningモデルのtest cohortでのAUROCの分散は？
 -   死亡、心不全再入院という風に階層をおいた時のWin ratioの95%信頼区間は？
 
-医学では[正規分布]{style="color: red"}でないものの方が多い！
+医学では[**正規分布**]{style="color: red"}でないものの方が多い！
 
-## Bootstrapの歴史
+## Bootstrapとは
 
--   Jacknifeという手法が\*\*\*年に開発された
+-   Jackknife法などと同じresampling法の一種
+
+-   元のデータからランダムに取り出す
+
+-   この際に[**重複を許可する**]{style="color: red"}のが特徴 = 使われないのもある
+
+-   どうして？
+
+## Bootstrap法の歴史
+
+-   Jackknifeという手法が1949年に開発された
+
 -   これは、1つずつ標本から抜いていくという手法
+
 -   どんな時にも使えるから、便利な十徳ナイフという名前が付けられた
--   こっちの方が自然なイメージ
 
-## Jacknife
+-   こっちの方が自然なイメージだが**問題点**があった
 
-**例えば** - MIを起こした患者の年齢とLDLを見たデータがあるとして
+## Jacknife法の問題点
+
+- 　MIを起こした患者の年齢とLDLを見たデータがあるとして
 
 ```{r}
+nums = 29
 mi_dat <- data.frame(
-    id = 1:99, 
-    age = rnorm(n = 99, mean = 75, sd = 3), 
-    ldl = runif(n = 99, min = 170, max = 210)
+    id = 1:nums, 
+    age = rnorm(n = nums, mean = 75, sd = 3), 
+    ldl = runif(n = nums, min = 170, max = 210), 
+    comment = rep("  ", nums)
 ) |> 
-tibble::add_row(id = 100, age = 25, ldl = 300) |> 
-tibble::add_row(id = 101, age = 35, ldl = 75)
-tail(mi_dat, 3)
+tibble::add_row(id = nums + 1, age = 25, ldl = 300, comment = "FHの患者") |> 
+tibble::add_row(id = nums + 2, age = 35, ldl = 75, comment = "特発性冠動脈解離")
+tail(mi_dat, 4) |> 
+  gt::gt() |> 
+  gtExtras::gt_highlight_rows(rows = 3:4, fill = "lightgrey",
+                              bold_target_only = TRUE, 
+                              target_col = comment)
 ```
 
 ## その場合
@@ -119,20 +138,24 @@ hist(mi_dat$ldl)
 
 ## Bootstrapの概念
 
-Plug in principles
+-    Plug in principles
+-    簡単にいうと「標本の分布は母集団の分布とほぼ同じ」というもの
 
 ## How to bootstrap 1
 
-```{r, tables}
-library(tidyverse)
-dat <- tibble::tibble(
-    id = 1:300, 
-    impact_factor = rnorm(n = 300, mean = 0, sd = 1)) |> 
-    dplyr::mutate(impact_factor = if_else(impact_factor < 0, 0, impact_factor))
-knitr::kable(head(dat, 5))
-hist(dat$impact_factor)
+```{r, starwars}
+dat_star <- dplyr::select(starwars, name, height, mass, species)
+
+gt::gt(head(dat_star), 4)
 ```
 
+```{r, bootstrap-method1}
+set.seed(4)
+sample(nrow(starwars), replace = TRUE) |> 
+  sort()
+```
+
+-    同じものが複数ある
 ## How to bootstrap 1
 
 ::: aside
