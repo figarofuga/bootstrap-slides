@@ -37,6 +37,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         skimr \
         tidymodels \
         data.table \
+        gt \
+        gtExtras \
     && rm -rf /tmp/downloaded_packages
 
 
