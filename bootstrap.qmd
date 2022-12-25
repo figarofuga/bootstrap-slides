@@ -73,22 +73,22 @@ hist(dat$bmi)
 ## Bootstrapとは
 
 -   Jackknife法などと同じresampling法の一種
-
+-   Efronが1979年に開発した手法
 -   元のデータからランダムに取り出す
-
 -   この際に[**重複を許可する**]{style="color: red"}のが特徴 = 使われないのもある
 
--   どうして？
+## おまけ〜Bootstrapの名前
+-   ホラ吹き男爵の冒険のエピソード
+-   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある ![](images/real_bootstrap.png)![](images/horafuki.png)
+-   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
-## Bootstrap法の歴史
+## Bootstrap法〜Jackknifeとの比較
 
--   Jackknifeという手法が1949年に開発された
-
+-   Bootstrapの前に、Jackknifeという手法が1949年に開発された
 -   これは、1つずつ標本から抜いていくという手法
-
 -   どんな時にも使えるから、便利な十徳ナイフという名前が付けられた
-
 -   こっちの方が自然なイメージだが**問題点**があった
+![](images/Jackknife.png)
 
 ## Jacknife法の問題点
 
@@ -128,13 +128,6 @@ hist(mi_dat$ldl)
 :::
 
 ::::
-
-## Bootstrapとはなにか？
-
--   Efronが\*\*\*年に開発した手法
--   ホラ吹き男爵の冒険のエピソード
--   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある ![](images/real_bootstrap.png)![](images/horafuki.png)
--   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
 ## Bootstrapの概念
 
