@@ -59,7 +59,7 @@ hist(dat$bmi)
 
 ## 信頼区間の出し方
 
--   この分布が**t分布に従うとして**、t分布の平均と分散を最尤法で推定
+-   この分布が**正規分布に従うとして**、t分布の平均と分散を最尤法で推定
 -   t分布の数表を確認して、1.96×標準偏差で計算する
 
 ## でも・・・・・・
@@ -79,11 +79,16 @@ hist(dat$bmi)
 
 ## おまけ〜Bootstrapの名前
 -   ホラ吹き男爵の冒険のエピソード
--   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある ![](images/real_bootstrap.png)![](images/horafuki.png)
+-   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある 
 -   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
-## Bootstrap法〜Jackknifeとの比較
+:::{#fig-bootstrap layout-ncol=2}
 
+![bootstrap](images/real_bootstrap.png){fig-align="left"}
+![ホラ吹き男爵の冒険](images/horafuki.png){fig-align="right"}
+:::
+
+## Bootstrap法〜Jackknifeとの比較
 -   Bootstrapの前に、Jackknifeという手法が1949年に開発された
 -   これは、1つずつ標本から抜いていくという手法
 -   どんな時にも使えるから、便利な十徳ナイフという名前が付けられた
@@ -113,7 +118,10 @@ tail(mi_dat, 4) |>
 
 ## その場合
 
--   このようなデータの時に分散を広く推定してしまう :::: {.columns} ::: {.column width="40%"}
+-   このようなデータの時に分散を広く推定してしまう 
+:::: {.columns} 
+
+::: {.column width="40%"}
 
 ```{r}
 hist(mi_dat$age)
@@ -133,6 +141,7 @@ hist(mi_dat$ldl)
 
 -    Plug in principles
 -    簡単にいうと「標本の分布は母集団の分布とほぼ同じ」というもの
+![](images/bootstrap_image.jpg)
 
 ## How to bootstrap 1
 
@@ -149,6 +158,7 @@ sample(nrow(starwars), replace = TRUE) |>
 ```
 
 -    同じものが複数ある
+
 ## How to bootstrap 1
 
 ::: aside
