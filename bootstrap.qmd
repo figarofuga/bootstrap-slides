@@ -5,73 +5,82 @@ format: revealjs
 engine: knitr
 ---
 
+```{r, setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+  comment = '', fig.width = 6, fig.height = 6, echo = FALSE, warning = FALSE
+)
+library(tibble)
+library(dplyr)
+library(gt)
+library(gtExtras)
+```
+
 ## Take home messages
 
-普通に95%信頼区間が出せない時に. 
+普通に95%信頼区間が出せない時に.
 
-- 大元のデータから
-- n = 1000以上で
-- Bootstrap標本を使って計算する
-- 基本はPercentile法で良いが、BCa法やBootstrap t標本という手もある
+-   大元のデータから
+-   n = 1000以上で
+-   Bootstrap標本を使って計算する
+-   基本はPercentile法で良いが、BCa法やBootstrap t標本という手もある
 
 ## Introduction
 
-- 最近研究でbootstrapを使う事が複数回あった
-- 正直雰囲気でやっていたので、しっかり勉強してみたい
+-   最近研究でbootstrapを使う事が複数回あった
+-   正直雰囲気でやっていたので、しっかり勉強してみたい
 
 ## 95％信頼区間の出し方
-例えば、患者のBMIを出すとき
 
+例えば、患者のBMIを出すとき
 
 ## 
 
-:::: {.columns}
+::: columns
 ::: {.column width="40%"}
 ```{r bmi}
-library(knitr)
-library(tibble)
-library(dplyr)
+
+
 dat <- tibble(
     id = 1:300, 
     bmi = rnorm(n = 300, mean = 21, sd = 1.0)
 )
-kable(head(dat, 5))
+gt::gt(head(dat, 5))
 ```
 :::
 
 ::: {.column width="60%"}
+```{r mi-hist}
 
-```{r warning=FALSE,message=FALSE}
 hist(dat$bmi)
 ```
-
 :::
-
-::::
+:::
 
 ## 信頼区間の出し方
 
-- この分布が**t分布に従うとして**、t分布の平均と分散を最尤法で推定
-- t分布の数表を確認して、1.96×標準偏差で計算する
-
+-   この分布が**t分布に従うとして**、t分布の平均と分散を最尤法で推定
+-   t分布の数表を確認して、1.96×標準偏差で計算する
 
 ## でも・・・・・・
 
-- 心不全患者のBNPの分布は？
-- 新しいDeep learningモデルのtest cohortでのAUROCの分散は？
-- 死亡、心不全再入院という風に階層をおいた時のWin ratioの95%信頼区間は？
+-   心不全患者のBNPの分布は？
+-   新しいDeep learningモデルのtest cohortでのAUROCの分散は？
+-   死亡、心不全再入院という風に階層をおいた時のWin ratioの95%信頼区間は？
 
-医学では正規分布でないものの方が多い！
+医学では[正規分布]{style="color: red"}でないものの方が多い！
 
 ## Bootstrapの歴史
-- Jacknifeという手法が***年に開発された
-- これは、1つずつ標本から抜いていくという手法
-- どんな時にも使えるから、便利な十徳ナイフという名前が付けられた
-- こっちの方が自然なイメージ
+
+-   Jacknifeという手法が\*\*\*年に開発された
+-   これは、1つずつ標本から抜いていくという手法
+-   どんな時にも使えるから、便利な十徳ナイフという名前が付けられた
+-   こっちの方が自然なイメージ
 
 ## Jacknife
-**例えば**
-- MIを起こした患者の年齢とLDLを見たデータがあるとして
+
+**例えば** - MIを起こした患者の年齢とLDLを見たデータがあるとして
+
 ```{r}
 mi_dat <- data.frame(
     id = 1:99, 
@@ -84,12 +93,13 @@ tail(mi_dat, 3)
 ```
 
 ## その場合
-- このようなデータの時に分散を広く推定してしまう
-:::: {.columns}
-::: {.column width="40%"}
+
+-   このようなデータの時に分散を広く推定してしまう :::: {.columns} ::: {.column width="40%"}
+
 ```{r}
 hist(mi_dat$age)
 ```
+
 :::
 
 ::: {.column width="60%"}
@@ -97,15 +107,15 @@ hist(mi_dat$age)
 hist(mi_dat$ldl)
 ```
 :::
+
 ::::
 
 ## Bootstrapとはなにか？
-- Efronが***年に開発した手法
-- ホラ吹き男爵の冒険のエピソード
-- 「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある
-![](images/real_bootstrap.png){}![](images/horafuki.png)
-- 読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
+-   Efronが\*\*\*年に開発した手法
+-   ホラ吹き男爵の冒険のエピソード
+-   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある ![](images/real_bootstrap.png)![](images/horafuki.png)
+-   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
 ## Bootstrapの概念
 
@@ -124,18 +134,20 @@ hist(dat$impact_factor)
 ```
 
 ## How to bootstrap 1
+
 ::: aside
 Some additional commentary of more peripheral interest.
 :::
+
 ## How to bootstrap 1
 
 ## How to bootstrap 1
 
 ## その他のBootstrap法について
 
-- Bootstrap t分布
-- BCa法
-- ABC法など
+-   Bootstrap t分布
+-   BCa法
+-   ABC法など
 
 ## どう違うの？
 
@@ -143,14 +155,8 @@ Some additional commentary of more peripheral interest.
 
 ## Bootstrapの素朴な疑問
 
-- nは幾つにすればいいの？
-- 元データはどれくらい必要なの？
-- 結局どれを使えばいいの？
+-   nは幾つにすればいいの？
+-   元データはどれくらい必要なの？
+-   結局どれを使えばいいの？
 
 ## Take home message
-
-
-
-
-
-
