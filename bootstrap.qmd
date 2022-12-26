@@ -2,7 +2,10 @@
 title: "Bootstrapについて"
 author: "Nozomi Niimi"
 format: revealjs
+height: 700
+width: 960
 engine: knitr
+bibliography: bootstrap.bib
 ---
 
 ```{r, setup, include=FALSE}
@@ -74,30 +77,29 @@ hist(dat$bmi)
 
 -   Jackknife法などと同じresampling法の一種
 -   Efronが1979年に開発した手法
--   元のデータからランダムに取り出す
+-   元のデータからランダムに取り出す[@Efron2003-pq]
 -   この際に[**重複を許可する**]{style="color: red"}のが特徴 = 使われないのもある
 
 ## おまけ〜Bootstrapの名前
+
 -   ホラ吹き男爵の冒険のエピソード
--   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある 
+-   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある
 -   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
-:::{#fig-bootstrap layout-ncol=2}
-
-![bootstrap](images/real_bootstrap.png){fig-align="left"}
-![ホラ吹き男爵の冒険](images/horafuki.png){fig-align="right"}
+::: {#fig-bootstrap layout-ncol="2"}
+![bootstrap](images/real_bootstrap.png){fig-align="left"} ![ホラ吹き男爵の冒険](images/horafuki.png){fig-align="right"}
 :::
 
 ## Bootstrap法〜Jackknifeとの比較
+
 -   Bootstrapの前に、Jackknifeという手法が1949年に開発された
 -   これは、1つずつ標本から抜いていくという手法
 -   どんな時にも使えるから、便利な十徳ナイフという名前が付けられた
--   こっちの方が自然なイメージだが**問題点**があった
-![](images/Jackknife.png)
+-   こっちの方が自然なイメージだが**問題点**があった ![](images/Jackknife.png)
 
 ## Jacknife法の問題点
 
-- 　MIを起こした患者の年齢とLDLを見たデータがあるとして
+-   　MIを起こした患者の年齢とLDLを見たデータがあるとして
 
 ```{r}
 nums = 29
@@ -118,15 +120,12 @@ tail(mi_dat, 4) |>
 
 ## その場合
 
--   このようなデータの時に分散を広く推定してしまう 
-:::: {.columns} 
+-   このようなデータの時に分散を広く推定してしまう :::: {.columns}
 
 ::: {.column width="40%"}
-
 ```{r}
 hist(mi_dat$age)
 ```
-
 :::
 
 ::: {.column width="60%"}
@@ -139,9 +138,8 @@ hist(mi_dat$ldl)
 
 ## Bootstrapの概念
 
--    Plug in principles
--    簡単にいうと「標本の分布は母集団の分布とほぼ同じ」というもの
-![](images/bootstrap_image.jpg)
+-   Plug in principles
+-   簡単にいうと「標本の分布は母集団の分布とほぼ同じ」というもの ![](images/bootstrap_image.jpg)
 
 ## How to bootstrap 1
 
@@ -157,7 +155,7 @@ sample(nrow(starwars), replace = TRUE) |>
   sort()
 ```
 
--    同じものが複数ある
+-   同じものが複数ある
 
 ## How to bootstrap 1
 
