@@ -87,7 +87,8 @@ hist(dat$bmi)
 -   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
 ::: {#fig-bootstrap layout-ncol="2"}
-![bootstrap](images/real_bootstrap.png){fig-align="left"} ![ホラ吹き男爵の冒険](images/horafuki.png){fig-align="right"}
+![bootstrap](images/real_bootstrap.png){height=30%, fig-align="left"} 
+![ホラ吹き男爵の冒険](images/horafuki.png){height=30%,fig-align="right"}
 :::
 
 ## Bootstrap法〜Jackknifeとの比較
