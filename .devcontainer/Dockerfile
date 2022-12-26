@@ -30,6 +30,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && install2.r --error --skipinstalled --ncpus -1 \
         languageserver \
         httpgd \
+        bootstrap \
         patchwork \
         here \
         janitor \
