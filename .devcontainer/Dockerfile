@@ -36,6 +36,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         janitor \
         palmerpenguins \
         skimr \
+        kableExtra \
         tidymodels \
         data.table \
         gt \
