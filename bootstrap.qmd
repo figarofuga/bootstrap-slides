@@ -253,6 +253,7 @@ plot(boot_height)
 -   Biasを修正する為に複数のパラメーターを使う
 -   BC法: Bootstrapだけでなんとかなる
 -   BCa法(ABC法): 
+https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html
 
 ## どれを選べばいいの？
 
