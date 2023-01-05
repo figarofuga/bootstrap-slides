@@ -222,7 +222,7 @@ boot_mean <- \(dat, i){
 
 boot_height <- boot(dat_star, statistic = boot_mean, R = 500)
 
-hist(boot_height$t)
+plot(boot_height)
 
 ```
 
@@ -242,10 +242,17 @@ hist(boot_height$t)
 ## Bootstrapの種類
 
 -   最も基本は上記の**Percentile法** <br>
-→ ただし、Biasが出る事があり、派生方法が非常に多い
--   Bootstrap t分布
--   BCa法
--   ABC法など
+→ ただし、**以下にのべる弱点**がある
+- Percentile法の弱点
+1. 収束が遅い
+2. 元データを使っていない
+→ Biasが生まれる
+
+## Bootstrap法の改善
+
+-   Biasを修正する為に複数のパラメーターを使う
+-   BC法: Bootstrapだけでなんとかなる
+-   BCa法(ABC法): 
 
 ## どれを選べばいいの？
 
@@ -253,19 +260,12 @@ hist(boot_height$t)
 
 -   可能なら専門家に確認する
 -   過去の論文[@Carpenter2000-fo]では、Flowchartが示されているが・・・・・・
--   Efron自身はABC法に未来を感じていた様子[@Efron2003-pq]
--   全く分からなければPercentile法が無難だと思う
-
-## その他のBootstrap法について
-
+-   全く分からなければBCa法が無難だと思う
 -   BCa法は・・・・・・
--   Bootstrap t法はかなり良いが、Parametric
--   本気でやるためには専門家がいた方が良いが、ある程度はPercentile法で戦うのも一つの手だと思う
 
 ## Bootstrapの素朴な疑問
 
 -   nは幾つにすればいいの？
 -   元データはどれくらい必要なの？
--   結局どれを使えばいいの？
 
 ## Take home message
