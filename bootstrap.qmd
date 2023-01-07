@@ -86,10 +86,8 @@ hist(dat$bmi)
 -   ホラ吹き男爵の冒険のエピソード
 -   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある
 -   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
-:::
 
-::: {layout-ncol="2"}
-![horafuki](images/horafuki.png){height="170px"} ![bootstrap](images/real_bootstrap.png){height="170px"}
+![](images/bootstrap_horafuki.jpg){height="170px"} 
 :::
 
 ## Bootstrap法〜Jackknifeとの比較
