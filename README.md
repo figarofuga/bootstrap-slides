@@ -1,6 +1,7 @@
 # Purpose
-copy from https://github.com/revodavid/devcontainers-rstudio
-The purpose of this repositry is to use Rstudio in github-codespaces 
+
+The purpose of this repositry is to practice and use quarto markdown.
+We made the presentation of bootstrap methods, especially bootstrap confidence interval.
 
 If you update this repositry in other local environments.
 
