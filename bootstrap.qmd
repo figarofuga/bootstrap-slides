@@ -22,6 +22,14 @@ library(boot)
 library(bootstrap)
 ```
 
+<style>
+  .reveal section p {
+    display: inline-block; 
+    font-size: 0.6em; 
+    line-height: 1.2em; 
+    vertical-align: top;
+  }
+</style>
 ## Take home messages
 
 普通に95%信頼区間が出せない時に.
