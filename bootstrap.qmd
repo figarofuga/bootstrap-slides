@@ -30,6 +30,27 @@ library(bootstrap)
     vertical-align: top;
   }
 </style>
+<style>
+  .reveal section li {
+    list-style-type: disc;
+    display: inline-block; 
+    font-size: 0.6em; 
+    line-height: 1.2em; 
+    vertical-align: top;
+  }
+</style>
+
+<style>
+  .reveal section ul {
+    list-style-type: disc;
+    display: inline-block; 
+    font-size: 0.6em; 
+    line-height: 1.2em; 
+    vertical-align: top;
+  }
+</style>
+
+
 ## Take home messages
 
 普通に95%信頼区間が出せない時に.
@@ -46,10 +67,8 @@ library(bootstrap)
 
 ## 95％信頼区間の出し方
 
-例えば、患者のBMIを出すとき
-
 ::: columns
-::: {.column width="40%"}
+::: {.column width="45%"}
 ```{r bmi}
 dat <- tibble(
     id = 1:300, 
@@ -59,14 +78,18 @@ kable(head(dat, 10)) |>
   kable_styling(font_size = 20)
 ```
 :::
+::: {.column width="10%"}
 
-::: {.column width="60%"}
+:::
+::: {.column width="45%"}
 ```{r mi-hist}
 
 hist(dat$bmi)
 ```
 :::
 :::
+
+-   例えば、患者のBMIを出すときはどう考えるか？
 
 ## 信頼区間の出し方
 
@@ -148,7 +171,7 @@ hist(mi_dat$ldl, breaks = 30)
 ## その場合
 
 -   このようなデータ(連続じゃない時)の時に分散を広く推定してしまう
--   イメージだが、外れ値を何度も数えてしまう<br> (FHを29回数えている)
+-   イメージだが、外れ値を何度も数えてしまう (FHを29回数えている)
 -   平均値とSDは出来るが、中央値とPercentileは苦手
 
 ## Bootstrapの前提条件
@@ -159,8 +182,6 @@ hist(mi_dat$ldl, breaks = 30)
 ![](images/bootstrap_image.jpg){height="350px" fig-align="center"}
 
 ## bootstrapの簡単な例
-
--簡単なものとして、身長の平均値と標準誤差を出してみる
 
 ::: columns
 ::: {.column width="45%"}
@@ -181,6 +202,9 @@ hist(dat_star$height)
 ```
 :::
 :::
+
+-    簡単なものとして、身長の平均値と標準誤差を出してみる
+
 
 ## How to bootstrap 1
 
@@ -207,6 +231,10 @@ kable(head(sw_boot1, 15)) |>
 ```
 :::
 :::
+
+-  行数の数字をランダムに抽出する<br>
+-  この時、重複を許す！
+
 
 ## How to bootstrap 2
 
