@@ -38,16 +38,6 @@ library(bootstrap)
   }
 </style>
 
-<style>
-  .reveal section ul {
-    list-style-type: disc;
-    display: inline-block; 
-    font-size: 0.6em; 
-    line-height: 1.2em; 
-    vertical-align: top;
-  }
-</style>
-
 
 ## Take home messages
 
@@ -116,7 +106,7 @@ hist(dat$bmi)
 -   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある
 -   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
-![](images/bootstrap_horafuki.jpg){height="170px"} 
+![](images/bootstrap_horafuki.jpg){height="170px" fig-align="center"} 
 :::
 
 ## Bootstrap法〜Jackknifeとの比較
