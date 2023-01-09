@@ -24,22 +24,6 @@ library(boot)
 library(bootstrap)
 ```
 
-<style>
-  .reveal section p {
-    display: inline-block; 
-    font-size: 0.6em; 
-    line-height: 1.2em; 
-    vertical-align: top;
-  }
-</style>
-<style>
-  .reveal section ul,li {
-    list-style-type: disc; 
-    font-size: 0.8em; 
-    line-height: 1.2em;
-  }
-</style>
-
 
 ## Take home messages
 
