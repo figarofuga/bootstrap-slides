@@ -31,12 +31,10 @@ library(bootstrap)
   }
 </style>
 <style>
-  .reveal section li {
-    list-style-type: disc;
-    display: inline-block; 
-    font-size: 0.6em; 
-    line-height: 1.2em; 
-    vertical-align: top;
+  .reveal section ul,li {
+    list-style-type: disc; 
+    font-size: 0.8em; 
+    line-height: 1.2em;
   }
 </style>
 
