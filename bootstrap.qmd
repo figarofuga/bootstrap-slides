@@ -270,7 +270,8 @@ https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html
 -   可能なら専門家に確認する
 -   過去の論文[@Carpenter2000-fo]では、Flowchartが示されているが・・・・・・
 -   全く分からなければBCa法が無難だと思う
--   BCa法は・・・・・・
+-   分散が分かればBootstrap tが良いらしいが、分散が分かっているなら最初からBootstrapを使わない気もする
+-   BCa法はBootstrapの繰り返しが多い必要がある
 
 ## Bootstrapの素朴な疑問
 
@@ -278,3 +279,8 @@ https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html
 -   元データはどれくらい必要なの？
 
 ## Take home message
+
+## References
+
+::: {#refs}
+:::
