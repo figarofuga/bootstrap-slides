@@ -237,12 +237,14 @@ plot(boot_height)
 ## How to bootstrap 4
 
 -   ここからやり方は複数ある[@Bland2015-gy]
-
-1.  統計量の分布が正規分布の場合は通常の方法(1.96xSD)をする事がある <br> 
+-   代表的なものは以下の4つ
+    1.  標本から計算した統計量にBootstrap標本から計算した分散を用いた正規分布を足し算して計算する(Normal法) <br> 
 → sd = `r sd(boot_height$t)`
-2.  2.5% \~ 97.5%の範囲をそのまま提示する <br>
+    1.  2.5% \~ 97.5%の範囲をそのまま提示する(Percentile法) <br>
 → [`r quantile(boot_height$t, probs = c(0.025, 0.0975))`]
-
+    1.  標本から計算した統計量にBootstrap標本の2.5%tile, 97.5%tileの値を引き算する(Basic法)
+    1.  Percentile法を補正したBCa法
+    1.  事前に分かっている分散を用いて、統計量を割り算してt分布で近似する(Bootstrap-t法)
 ::: callout-note
 どの方法を用いるにせよ必ず1回は**Histogram**にして分布を確認する！！
 :::
@@ -270,15 +272,30 @@ https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html
 -   可能なら専門家に確認する
 -   過去の論文[@Carpenter2000-fo]では、Flowchartが示されているが・・・・・・
 -   全く分からなければBCa法が無難だと思う
--   分散が分かればBootstrap tが良いらしいが、分散が分かっているなら最初からBootstrapを使わない気もする
+-   分散が分かればBootstrap-tが良いらしいが、分散が分かっているなら最初からBootstrapを使わない気もする
 -   BCa法はBootstrapの繰り返しが多い必要がある
 
 ## Bootstrapの素朴な疑問
 
 -   nは幾つにすればいいの？
--   元データはどれくらい必要なの？
+-   元データは少なくてもいいの？
+
+## Bootstrapの素朴な疑問 1
+-   nは幾つにすればいいの？<br>
+→　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000程度必要
+
+## Bootstrapの素朴な疑問 2
+-   元データは少なくてもいいの？
+→　少なすぎるとBiasは補正しきれない。大元のデータがちゃんと(母集団を)近似するくらいじゃないとだめ
+-   ロジスティック回帰やCox回帰などで、Bootstrapでエラーが出る(偶然、Bootstrap標本でイベントが一回も起きない時)があるが、その際はおそらく大元のデータが足りない
 
 ## Take home message
+
+-   Bootstrap法は
+    1. 信頼区間がちゃんと計算出来ない時に
+    2. n = 1000-2000のBootstrap標本を作成する
+    3. このときに必ず、**統計量のHistogram**を確認する！
+    4. 困った時はBCa法で良いだろう！
 
 ## References
 
