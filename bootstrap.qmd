@@ -91,7 +91,7 @@ hist(dat$bmi)
 -   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある
 -   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
-![](images/bootstrap_horafuki.jpg){height="170px" fig-align="center"} 
+![](images/bootstrap_horafuki.jpg){height="300px" fig-align="center"} 
 :::
 
 ## Bootstrap法〜Jackknifeとの比較
@@ -101,7 +101,7 @@ hist(dat$bmi)
 -   どんな時にも使えるから、便利な十徳ナイフという名前が付けられた
 -   こっちの方が自然なイメージだが**問題点**があった
 
-![](images/Jackknife.png){height="160px" fig-align="center"}
+![](images/Jackknife.png){height="300px" fig-align="center"}
 
 ## Jacknife法の問題点1
 
@@ -236,14 +236,13 @@ plot(boot_height)
 ## How to bootstrap 4
 
 -   ここからやり方は複数ある[@Bland2015-gy]
--   代表的なものは以下の4つ
+-   代表的なものは以下の3つ
     1.  標本から計算した統計量にBootstrap標本から計算した分散を用いた正規分布を足し算して計算する(Normal法) <br> 
 → sd = `r sd(boot_height$t)`
     1.  2.5% \~ 97.5%の範囲をそのまま提示する(Percentile法) <br>
 → [`r quantile(boot_height$t, probs = c(0.025, 0.0975))`]
     1.  標本から計算した統計量にBootstrap標本の2.5%tile, 97.5%tileの値を引き算する(Basic法)
-    1.  Percentile法を補正したBCa法
-    1.  事前に分かっている分散を用いて、統計量を割り算してt分布で近似する(Bootstrap-t法)
+
 ::: callout-note
 どの方法を用いるにせよ必ず1回は**Histogram**にして分布を確認する！！
 :::
@@ -259,9 +258,14 @@ plot(boot_height)
 
 ## Bootstrap法の改善
 
--   Biasを修正する為に複数のパラメーターを使う
--   BC法: Bootstrapだけでなんとかなる
--   BCa法(ABC法): 
+-   BCa法やBootstrap-t法が考えられている
+    -  Biasを修正する為に複数のパラメーターを使う手法が考えられている: BCa法、Bootstrap-t法
+-   Bootstrap-t法: 分散を使って、t分布に近似する
+    -  分散は理論値やjackknife法で計算する必要がある
+-   BCa法: Bootstrapだけでなんとかなるのが利点
+
+$hat z_0 = \Phi^{-1} (\frac{\#(\hat \theta_b^*<\hat \theta)}{B})$
+
 https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html
 
 ## どれを選べばいいの？
