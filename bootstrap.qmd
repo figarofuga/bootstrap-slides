@@ -260,7 +260,7 @@ plot(boot_height)
 -   BCa法やBootstrap-t法が考えられている
     -  Biasを修正する為に複数のパラメーターを使う手法が考えられている: BCa法、Bootstrap-t法
 -   Bootstrap-t法: 分散を使って、t分布に近似する
-    -  分散は理論値やjackknife法で計算する必要がある
+    -  分散は理論値やjackknife法で計算する必要がある[@Kaneyoshi2011]
 -   BCa法: Bootstrapだけでなんとかなるのが利点
 
 $hat z_0 = \Phi^{-1} (\frac{\#(\hat \theta_b^*<\hat \theta)}{B})$
