@@ -26,21 +26,12 @@ library(bootstrap)
 
 ## クイズ
 
-![](images/bootstrap_horafuki.jpg){height="170px" fig-align="center"} 
+![](images/bootstrap_quiz.jpeg){height="300px" fig-align="center"} 
 
 1. Bootstrapは靴の中のどの部分でしょうか？
 1. Bootstrap信頼区間を出すときには何回繰り返しが必要でしょうか？
 1. Bootstrap信頼区間を出す前に必ずやらないといけない方法はなんでしょうか？
 1. Bootstrap信頼区間の時に良い方法はなんでしょうか？
-
-## Take home messages
-
-普通に95%信頼区間が出せない時に.
-
--   大元のデータから
--   n = 1000以上で
--   Bootstrap標本を使って計算する
--   基本はPercentile法で良いが、BCa法やBootstrap t標本という手もある
 
 ## Introduction
 
@@ -299,20 +290,12 @@ https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html
 
 ## クイズの答え
 
-![](images/bootstrap_horafuki.jpg){height="170px" fig-align="center"} 
+![](images/bootstrap_answer.jpeg){height="300px" fig-align="center"} 
 
 1. Bootstrapは靴の中のどの部分でしょうか？
-1. Bootstrap信頼区間を出すときには何回繰り返しが必要でしょうか？
-1. Bootstrap信頼区間を出す前に必ずやらないといけない方法はなんでしょうか？
-1. Bootstrap信頼区間の時に良い方法はなんでしょうか？
-
-## Take home message
-
--   Bootstrap法は
-    1. 信頼区間がちゃんと計算出来ない時に
-    2. n = 1000-2000のBootstrap標本を作成する
-    3. このときに必ず、**統計量のHistogram**を確認する！
-    4. 困った時はBCa法で良さそう
+1. Bootstrap信頼区間を出すときには1000-2000回繰り返しをする
+1. Bootstrap信頼区間を出す前に必ず**統計量のHistogram**を確認する！
+1. Bootstrap信頼区間の時には**BCa法を行う！
 
 ## References
 
