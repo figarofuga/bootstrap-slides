@@ -1,6 +1,7 @@
 ---
 title: "Bootstrapについて"
 author: "Nozomi Niimi"
+date: "2023/2/10"
 format:
   revealjs:
     smaller: true
@@ -26,12 +27,12 @@ library(bootstrap)
 
 ## クイズ
 
-![](images/bootstrap_quiz.jpeg){height="300px" fig-align="center"} 
+![](images/bootstrap_quiz.jpeg){height="300px" fig-align="center"}
 
-1. Bootstrapは靴の中のどの部分でしょうか？
-1. Bootstrap信頼区間を出すときには何回繰り返しが必要でしょうか？
-1. Bootstrap信頼区間を出す前に必ずやらないといけない方法はなんでしょうか？
-1. Bootstrap信頼区間の時に良い方法はなんでしょうか？
+1.  Bootstrapは靴の中のどの部分でしょうか？
+2.  Bootstrap信頼区間を出すときには何回繰り返しが必要でしょうか？
+3.  Bootstrap信頼区間を出す前に必ずやらないといけない方法はなんでしょうか？
+4.  Bootstrap信頼区間の時に良い方法はなんでしょうか？
 
 ## Introduction
 
@@ -51,9 +52,10 @@ kable(head(dat, 10)) |>
   kable_styling(font_size = 20)
 ```
 :::
-::: {.column width="10%"}
 
+::: {.column width="10%"}
 :::
+
 ::: {.column width="45%"}
 ```{r mi-hist}
 
@@ -65,6 +67,8 @@ hist(dat$bmi)
 -   例えば、患者のBMIを出すときはどう考えるか？
 
 ## 信頼区間の出し方
+
+![](images/ci_image.jpg){fig-align="center"}
 
 -   この分布が**正規分布に従うとして**、t分布の平均と分散を最尤法で推定
 -   t分布の数表を確認して、1.96×標準偏差で計算する
@@ -79,20 +83,21 @@ hist(dat$bmi)
 
 ## Bootstrapとは
 
+![](images/efron.JPG)
+
 -   Jackknife法などと同じresampling法の一種
 -   Efronが1979年に開発した手法
--   元のデータからランダムに取り出す[@Efron2003-pq]
+-   元のデータからランダムに取り出して新しいデータセットを作成する[@Efron2003-pq]
 -   この際に[**重複を許可する**]{style="color: red"}のが特徴 = 使われないのもある
 
 ## おまけ〜Bootstrapの名前
 
-::: {style="font-size: 0.3"}
 -   ホラ吹き男爵の冒険のエピソード
 -   「余は、底なし沼にハマった時に自分のBootstrapを引っぱって抜け出したことがある
 -   読んでみたが、この本にはそのエピソードなし(そのエピソードは存在しないという説もあり)
 
-![](images/bootstrap_horafuki.jpg){height="300px" fig-align="center"} 
-:::
+![](images/bootstrap_horafuki.jpg){height="300px" fig-align="center"}
+
 
 ## Bootstrap法〜Jackknifeとの比較
 
@@ -175,8 +180,7 @@ hist(dat_star$height)
 :::
 :::
 
--    簡単なものとして、身長の平均値と標準誤差を出してみる
-
+-   簡単なものとして、身長の平均値の95%信頼区間を導出してみる
 
 ## How to bootstrap 1
 
@@ -204,9 +208,8 @@ kable(head(sw_boot1, 15)) |>
 :::
 :::
 
--  行数の数字をランダムに抽出する<br>
--  この時、重複を許す！
-
+-   行数の数字をランダムに抽出する<br>
+-   この時、重複を許す！
 
 ## How to bootstrap 2
 
@@ -236,11 +239,9 @@ plot(boot_height)
 
 -   ここからやり方は複数ある[@Bland2015-gy]
 -   代表的なものは以下の3つ
-    1.  標本から計算した統計量にBootstrap標本から計算した分散を用いた正規分布を足し算して計算する(Normal法) <br> 
-→ sd = `r sd(boot_height$t)`
-    1.  2.5% \~ 97.5%の範囲をそのまま提示する(Percentile法) <br>
-→ [`r quantile(boot_height$t, probs = c(0.025, 0.0975))`]
-    1.  標本から計算した統計量にBootstrap標本の2.5%tile, 97.5%tileの値を引き算する(Basic法)
+    1.  標本から計算した統計量にBootstrap標本から計算した分散を用いた正規分布を足し算して計算する(Normal法) <br> → sd = `r sd(boot_height$t)`
+    2.  2.5% \~ 97.5%の範囲をそのまま提示する(Percentile法) <br> → \[`r quantile(boot_height$t, probs = c(0.025, 0.0975))`\]
+    3.  標本から計算した統計量にBootstrap標本の2.5%tile, 97.5%tileの値を引き算する(Basic法)
 
 ::: callout-note
 どの方法を用いるにせよ必ず1回は**Histogram**にして分布を確認する！！
@@ -248,34 +249,29 @@ plot(boot_height)
 
 ## Bootstrapの種類
 
--   最も基本は上記の**Percentile法** <br>
-→ ただし、**以下にのべる弱点**がある
-- Percentile法の弱点
-1. 収束が遅い
-2. 元データを使っていない
-→ Biasが生まれる
+-   最も基本は上記の**Percentile法** → ただし、**以下にのべる弱点**がある
+-   Percentile法の弱点
+    1.  収束が遅い
+    2.  元データを使っていない → Biasが生まれる[@Wicklin_undated-xu]
 
 ## Bootstrap法の改善
 
 -   BCa法やBootstrap-t法が考えられている
-    -  Biasを修正する為に複数のパラメーターを使う手法が考えられている: BCa法、Bootstrap-t法
--   Bootstrap-t法: 分散を使って、t分布に近似する
-    -  分散は理論値やjackknife法で計算する必要がある[@Kaneyoshi2011]
+    -   Biasを修正する為に複数のパラメーターを使う手法が考えられている: **BCa法**、Bootstrap-t法
+-   Bootstrap-t法: 分散値を使い、t分布に近似する
+    -   分散は理論値やjackknife法で計算する必要がある[@Kaneyoshi2011]
 -   BCa法: Bootstrapだけでなんとかなるのが利点
 
-$hat z_0 = \Phi^{-1} (\frac{\#(\hat \theta_b^*<\hat \theta)}{B})$
-
-https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html
 
 ## どれを選べばいいの？
 
 ![](images/choice_bootstrap.png){height="300px"}
 
 -   可能なら専門家に確認する
--   過去の論文[@Carpenter2000-fo]では、Flowchartが示されているが・・・・・・
+-   過去の論文[@Carpenter2000-fo]では、Flowchartが示されている
 -   全く分からなければBCa法が無難だと思う
--   分散が分かればBootstrap-tが良いらしいが、分散が分かっているなら最初からBootstrapを使わない気もする
--   BCa法はBootstrapの繰り返しが多い必要がある
+-   分散が分かればBootstrap-tが良いらしいが、現実的にはやや手間が増える
+-   BCa法はBootstrapの繰り返しが多いがRだと簡単に出来る[@boot1997]
 
 ## Bootstrapの素朴な疑問
 
@@ -283,22 +279,30 @@ https://blogs.sas.com/content/iml/2017/07/12/bootstrap-bca-interval.html
 -   元データは少なくてもいいの？
 
 ## Bootstrapの素朴な疑問 1
--   nは幾つにすればいいの？<br>
-→　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000程度必要
+
+-   nは幾つにすればいいの？<br> →　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000程度必要
+-   コンピュータの性能の向上に合わせて分散推定で1000、信頼区間は10,000という人もいる[@Chernick2008-zx]
 
 ## Bootstrapの素朴な疑問 2
--   元データは少なくてもいいの？
-→　少なすぎるとBiasは補正しきれない。大元のデータがちゃんと(母集団を)近似するくらいじゃないとだめ
+
+-   元データは少なくてもいいの？ →　少なすぎるとBiasは補正しきれない。大元のデータがちゃんと(母集団を)近似するくらいじゃないとだめ
+-   経験則だと最低30～50は必要と考えられる[@Chernick2008-zx]が求めたいものと状況による
 -   ロジスティック回帰やCox回帰などで、Bootstrapでエラーが出る(偶然、Bootstrap標本でイベントが一回も起きない時)があるが、その際はおそらく大元のデータが足りない
 
 ## クイズの答え
 
-![](images/bootstrap_answer.jpeg){height="300px" fig-align="center"} 
+![](images/bootstrap_answer.jpeg){height="300px" fig-align="center"}
 
-1. Bootstrapは靴の中のどの部分でしょうか？
-1. Bootstrap信頼区間を出すときには1000-2000回繰り返しをする
-1. Bootstrap信頼区間を出す前に必ず**統計量のHistogram**を確認する！
-1. Bootstrap信頼区間の時には**BCa法を行う！
+1.  Bootstrapは靴の中のどの部分でしょうか？
+2.  Bootstrap信頼区間を出すときには1000-2000回繰り返しをする
+3.  Bootstrap信頼区間を出す前に必ず**統計量のHistogram**を確認する！
+4.  Bootstrap信頼区間の時には**BCa法**を行う！
+
+## Thank you for your listening!!
+
+![](images/hair_bootstrap.png){fig-align="center"}
+
+-    これが本当にあった話らしい
 
 ## References
 
