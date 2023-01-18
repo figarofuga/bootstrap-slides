@@ -1,7 +1,7 @@
 ---
 title: "Bootstrapについて"
 author: "Nozomi Niimi"
-date: "2023/2/10"
+date: "2/10/2023"
 format:
   revealjs:
     smaller: true
@@ -83,7 +83,7 @@ hist(dat$bmi)
 
 ## Bootstrapとは
 
-![](images/efron.JPG)
+![](images/efron.JPG){fig-align="center"}
 
 -   Jackknife法などと同じresampling法の一種
 -   Efronが1979年に開発した手法
@@ -249,7 +249,7 @@ plot(boot_height)
 
 ## Bootstrapの種類
 
--   最も基本は上記の**Percentile法** → ただし、**以下にのべる弱点**がある
+-   最も基本は上記の**Percentile法** → ただし、**以下の弱点**がある
 -   Percentile法の弱点
     1.  収束が遅い
     2.  元データを使っていない → Biasが生まれる[@Wicklin_undated-xu]
@@ -257,7 +257,7 @@ plot(boot_height)
 ## Bootstrap法の改善
 
 -   BCa法やBootstrap-t法が考えられている
-    -   Biasを修正する為に複数のパラメーターを使う手法が考えられている: **BCa法**、Bootstrap-t法
+    -   Biasを修正する為に複数のパラメーターを使う手法が考えられている: [**BCa法**]{style="color: red"}、Bootstrap-t法
 -   Bootstrap-t法: 分散値を使い、t分布に近似する
     -   分散は理論値やjackknife法で計算する必要がある[@Kaneyoshi2011]
 -   BCa法: Bootstrapだけでなんとかなるのが利点
@@ -267,11 +267,15 @@ plot(boot_height)
 
 ![](images/choice_bootstrap.png){height="300px"}
 
--   可能なら専門家に確認する
 -   過去の論文[@Carpenter2000-fo]では、Flowchartが示されている
 -   全く分からなければBCa法が無難だと思う
--   分散が分かればBootstrap-tが良いらしいが、現実的にはやや手間が増える
+-   Bootstrap-tも良いが、現実的にはやや手間が増えるのと、良い分散の推定が得られないと信頼区間を広く推定してしまう[@DiCiccio1996-wt]
 -   BCa法はBootstrapの繰り返しが多いがRだと簡単に出来る[@boot1997]
+
+## 古典的な信頼区間とBootstrap信頼区間の違い
+
+![](images/imagine_bootstrap.jpeg){fig-align="center"}
+
 
 ## Bootstrapの素朴な疑問
 
@@ -291,12 +295,12 @@ plot(boot_height)
 
 ## クイズの答え
 
-![](images/bootstrap_answer.jpeg){height="300px" fig-align="center"}
+![](images/boostrap_answer.jpeg){height="300px" fig-align="center"}
 
 1.  Bootstrapは靴の中のどの部分でしょうか？
-2.  Bootstrap信頼区間を出すときには1000-2000回繰り返しをする
-3.  Bootstrap信頼区間を出す前に必ず**統計量のHistogram**を確認する！
-4.  Bootstrap信頼区間の時には**BCa法**を行う！
+2.  Bootstrap信頼区間を出すときには[**1000-2000回**]{style="color: red"}繰り返しをする
+3.  Bootstrap信頼区間を出す前に必ず[**統計量のHistogram**]{style="color: red"}を確認する！
+4.  Bootstrap信頼区間の時には[**BCa法**]{style="color: red"}を行う！
 
 ## Thank you for your listening!!
 
