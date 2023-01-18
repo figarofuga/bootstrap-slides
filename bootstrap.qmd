@@ -268,7 +268,7 @@ plot(boot_height)
 ![](images/choice_bootstrap.png){height="300px"}
 
 -   過去の論文[@Carpenter2000-fo]では、Flowchartが示されている
--   全く分からなければBCa法が無難だと思う
+-   全く分からなければ`r kableExtra::text_spec("BCa法", bold = TRUE, color = "red", font_size = 32)`が無難だと思う
 -   Bootstrap-tも良いが、現実的にはやや手間が増えるのと、良い分散の推定が得られないと信頼区間を広く推定してしまう[@DiCiccio1996-wt]
 -   BCa法はBootstrapの繰り返しが多いがRだと簡単に出来る[@boot1997]
 
@@ -284,7 +284,7 @@ plot(boot_height)
 
 ## Bootstrapの素朴な疑問 1
 
--   nは幾つにすればいいの？<br> →　Efron曰く、分散だけなら200程度、信頼区間なら1000-2000程度必要
+-   nは幾つにすればいいの？<br> →　Efron曰く、分散だけなら200程度、信頼区間なら`r kableExtra::text_spec("1000-2000回程度", bold = TRUE, color = "red", font_size = 32)`必要
 -   コンピュータの性能の向上に合わせて分散推定で1000、信頼区間は10,000という人もいる[@Chernick2008-zx]
 
 ## Bootstrapの素朴な疑問 2
